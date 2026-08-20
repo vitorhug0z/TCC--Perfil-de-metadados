@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Metadados para Estudos de Caso</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Perfil de Metadados para Estudos de Caso</h1>
+            <p>
+                Preencha os metadados do estudo de caso e gere automaticamente o arquivo XML.
+            </p>
+        </header>
+
+        <!-- ===================================================== -->
+        <!-- 1. INFORMAÇÕES GERAIS -->
+        <!-- ===================================================== -->
+
+        <section class="card">
+
+            <h2>1. Informações Gerais</h2>
+
+            <div class="field">
+
+                <label>
+                    Título
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Informe o título completo do estudo de caso.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="title">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Autor(es)
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Nome dos autores ou pesquisadores responsáveis pelo estudo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="creator">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Data
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Data de publicação ou realização do estudo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="date">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Idioma
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Idioma principal do estudo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="language">
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 2. FORMULAÇÃO DO PROBLEMA -->
+        <!-- ===================================================== -->
+
+        <section class="card">
+
+            <h2>2. Formulação do Problema</h2>
+
+            <div class="field">
+
+                <label>
+                    Descrição do Problema
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Descreva o problema investigado pelo estudo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <textarea id="problem"></textarea>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Objetivo
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Informe o objetivo principal da pesquisa.
+                        </span>
+                    </span>
+
+                </label>
+
+                <textarea id="objective"></textarea>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Natureza do Estudo
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Classifique como exploratório, descritivo ou explicativo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <select id="studyNature">
+                    <option value="">Selecione</option>
+                    <option>Exploratório</option>
+                    <option>Descritivo</option>
+                    <option>Explicativo</option>
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 3. UNIDADE-CASO -->
+        <!-- ===================================================== -->
+
+        <section class="card">
+
+            <h2>3. Definição da Unidade-Caso</h2>
+
+            <div class="field">
+
+                <label>
+                    Nome da Unidade-Caso
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Organização, equipe, projeto ou fenômeno analisado.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="unitName">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Tipo da Unidade
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Empresa, projeto, equipe, sistema ou organização.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="unitType">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Cobertura Espacial
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Local onde o estudo foi realizado.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="spatial">
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Cobertura Temporal
+
+                    <span class="tooltip">
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        <span class="tooltip-text">
+                            Período de realização do estudo.
+                        </span>
+                    </span>
+
+                </label>
+
+                <input type="text" id="temporal">
+
+            </div>
+
+        </section>
+
+        <!-- ===================================================== -->
+<!-- 4. NÚMERO DE CASOS -->
+<!-- ===================================================== -->
+
+<section class="card">
+
+    <h2>4. Determinação do Número de Casos</h2>
+
+    <div class="field">
+
+        <label>
+            Desenho do Caso
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Informe se o estudo foi conduzido como caso único ou múltiplos casos.
+                </span>
+            </span>
+
+        </label>
+
+        <select id="caseDesign">
+            <option>Caso Único</option>
+            <option>Múltiplos Casos</option>
+        </select>
+
+    </div>
+
+    <div class="field">
+
+        <label>
+            Quantidade de Casos
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Número total de casos analisados na pesquisa.
+                </span>
+            </span>
+
+        </label>
+
+        <input type="number" id="caseCount">
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- 5. COLETA DE DADOS -->
+<!-- ===================================================== -->
+
+<section class="card">
+
+    <h2>5. Coleta de Dados</h2>
+
+    <div class="field">
+
+        <label>
+            Fontes de Evidência
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Indique as fontes de evidência utilizadas na pesquisa, como entrevistas, documentos, observações, registros ou artefatos.
+                </span>
+            </span>
+
+        </label>
+
+        <textarea id="evidenceSources"></textarea>
+
+    </div>
+
+    <div class="field">
+
+        <label>
+            Técnicas de Coleta
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Descreva como os dados foram coletados a partir das fontes de evidência identificadas.
+                </span>
+            </span>
+
+        </label>
+
+        <textarea id="techniques"></textarea>
+
+    </div>
+
+    <div class="field">
+
+        <label>
+            Estratégia de Validação
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Informe os mecanismos utilizados para garantir a qualidade, validade e confiabilidade dos dados e resultados do estudo.
+                </span>
+            </span>
+
+        </label>
+
+        <textarea id="validityStrategy"></textarea>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- 6. ANÁLISE -->
+<!-- ===================================================== -->
+
+<section class="card">
+
+    <h2>6. Análise e Interpretação dos Dados</h2>
+
+    <div class="field">
+
+        <label>
+            Natureza da Análise
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Informe se a análise realizada foi qualitativa, quantitativa ou mista.
+                </span>
+            </span>
+
+        </label>
+
+        <textarea id="analysisNature"></textarea>
+
+    </div>
+
+    <div class="field">
+
+        <label>
+            Quadro Teórico
+
+            <span class="tooltip">
+                <i class="fa-solid fa-circle-info"></i>
+
+                <span class="tooltip-text">
+                    Teorias, modelos ou frameworks utilizados para orientar a interpretação dos resultados.
+                </span>
+            </span>
+
+        </label>
+
+        <textarea id="theoreticalFramework"></textarea>
+
+    </div>
+
+</section>
+
+        <div class="actions">
+
+            <button id="verRespostas">
+                <i class="fa-solid fa-eye"></i>
+                    Ver Respostas
+            </button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
