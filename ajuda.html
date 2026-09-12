@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajuda - Perfil de Metadados</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <a href="index.html">
+      <i class="fa-solid fa-house"></i>
+      Home
+    </a>
+    <a href="ajuda.html" class="active">
+      <i class="fa-solid fa-circle-question"></i>
+      Ajuda
+    </a>
+  </div>
+
+  <div class="main-content">
+    <div class="container">
+
+      <header>
+        <h1>Ajuda</h1>
+        <p>Guia de utilização do Perfil de Metadados para Estudos de Caso.</p>
+      </header>
+
+      <!-- SOBRE O SISTEMA -->
+      <section class="card">
+        <h2>1. Sobre o Sistema</h2>
+        <p>
+          Este sistema foi desenvolvido como parte de uma proposta para estruturar e organizar
+          metadados de estudos de caso em Engenharia de Software. Seu objetivo é apoiar
+          pesquisadores, estudantes e profissionais na descrição padronizada das informações
+          presentes em estudos de caso, permitindo maior organização, recuperação e reutilização
+          do conhecimento produzido.
+        </p>
+        <br>
+        <p>
+          Os metadados são informações que descrevem um recurso. No contexto dos estudos de caso,
+          eles permitem registrar aspectos importantes da pesquisa, como o problema investigado,
+          os objetivos, a unidade analisada, as estratégias de coleta de dados e os métodos de
+          análise utilizados. A utilização de um perfil de metadados padronizado contribui para
+          melhorar a qualidade da documentação dos estudos e facilitar comparações entre pesquisas.
+        </p>
+        <br>
+        <p>
+          A estrutura utilizada nesta aplicação foi construída com base em elementos do padrão
+          Dublin Core e em características específicas da metodologia de estudos de caso,
+          resultando em um perfil voltado para a representação de informações metodológicas e
+          contextuais relevantes para a Engenharia de Software.
+        </p>
+      </section>
+
+      <!-- COMO UTILIZAR -->
+      <section class="card">
+        <h2>2. Como Utilizar o Sistema</h2>
+        <ol class="help-list">
+          <li>Preencha os campos da seção <strong>Informações Gerais</strong>.</li>
+          <li>Descreva a <strong>Formulação do Problema</strong> investigado.</li>
+          <li>Defina a <strong>Unidade-Caso</strong> analisada.</li>
+          <li>Informe o <strong>Número de Casos</strong> estudados.</li>
+          <li>Descreva as estratégias de <strong>Coleta de Dados</strong>.</li>
+          <li>Informe os procedimentos de <strong>Análise e Interpretação dos Dados</strong>.</li>
+          <li>Clique em <strong>Ver Respostas</strong> para revisar as informações preenchidas.</li>
+          <li>Gere o arquivo XML contendo os metadados estruturados.</li>
+        </ol>
+      </section>
+
+      <!-- ESTRUTURA DO PERFIL -->
+      <section class="card">
+        <h2>3. Estrutura do Perfil</h2>
+        <p>
+          A tabela abaixo apresenta os elementos do perfil de metadados, seus contextos,
+          generalizações e regras de utilização.
+        </p>
+
+        <table class="help-table">
+          <thead>
+            <tr>
+              <th>Elemento</th>
+              <th>Contexto</th>
+              <th>Generalização</th>
+              <th>Regra de Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>dc:title</td>
+              <td>Informações Gerais</td>
+              <td>-</td>
+              <td>Inserir o título completo do estudo de caso.</td>
+            </tr>
+            <tr>
+              <td>dc:creator</td>
+              <td>Informações Gerais</td>
+              <td>-</td>
+              <td>Inserir o nome do pesquisador responsável pelo estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:date</td>
+              <td>Informações Gerais</td>
+              <td>-</td>
+              <td>Informar a data de realização ou publicação do estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:language</td>
+              <td>Informações Gerais</td>
+              <td>-</td>
+              <td>Informar o idioma principal do estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:type</td>
+              <td>Informações Gerais</td>
+              <td>-</td>
+              <td>Informar o tipo do recurso.</td>
+            </tr>
+            <tr>
+              <td>dc:subject</td>
+              <td>Problem Definition</td>
+              <td>problemDefinition</td>
+              <td>Agrupar os metadados relacionados à formulação do problema.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Problem Definition</td>
+              <td>problem</td>
+              <td>Descrever o problema investigado pelo estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Problem Definition</td>
+              <td>objective</td>
+              <td>Informar o objetivo principal da pesquisa.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Problem Definition</td>
+              <td>studyNature</td>
+              <td>Classificar o estudo como exploratório, descritivo ou explicativo.</td>
+            </tr>
+            <tr>
+              <td>dc:subject</td>
+              <td>Unit Case Definition</td>
+              <td>unitCaseDefinition</td>
+              <td>Agrupar os metadados relacionados à definição da unidade-caso.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Unit Case Definition</td>
+              <td>unitCase</td>
+              <td>Descrever a unidade analisada pelo estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Unit Case Definition</td>
+              <td>unitName</td>
+              <td>Informar o nome da unidade analisada.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Unit Case Definition</td>
+              <td>unitType</td>
+              <td>Informar o tipo da unidade analisada (empresa, equipe, projeto, sistema etc.).</td>
+            </tr>
+            <tr>
+              <td>dc:coverage</td>
+              <td>Unit Case Definition</td>
+              <td>spatial</td>
+              <td>Informar a delimitação espacial do estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:coverage</td>
+              <td>Unit Case Definition</td>
+              <td>temporal</td>
+              <td>Informar a delimitação temporal do estudo.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Unit Case Definition</td>
+              <td>caseStudyModality</td>
+              <td>Informar a modalidade do estudo de caso (intrínseco, instrumental ou coletivo).</td>
+            </tr>
+            <tr>
+              <td>dc:subject</td>
+              <td>Case Number Definition</td>
+              <td>caseNumberDefinition</td>
+              <td>Agrupar os metadados relacionados ao delineamento e quantidade de casos.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Case Number Definition</td>
+              <td>caseDesign</td>
+              <td>Informar se o estudo é de caso único ou múltiplos casos.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Case Number Definition</td>
+              <td>caseCount</td>
+              <td>Informar a quantidade de casos analisados.</td>
+            </tr>
+            <tr>
+              <td>dc:subject</td>
+              <td>Data Collection</td>
+              <td>dataCollection</td>
+              <td>Agrupar os metadados relacionados à coleta de dados.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Collection</td>
+              <td>evidenceSources</td>
+              <td>Listar as fontes de evidência utilizadas na pesquisa.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Collection</td>
+              <td>dataCollectionTechniques</td>
+              <td>Informar as técnicas empregadas na coleta dos dados.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Collection</td>
+              <td>technique</td>
+              <td>Informar uma técnica específica utilizada na coleta dos dados.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Collection</td>
+              <td>validityStrategy</td>
+              <td>Descrever a estratégia utilizada para validação dos dados coletados.</td>
+            </tr>
+            <tr>
+              <td>dc:subject</td>
+              <td>Data Analysis</td>
+              <td>dataAnalysis</td>
+              <td>Agrupar os metadados relacionados à análise e interpretação dos dados.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Analysis</td>
+              <td>analysisNature</td>
+              <td>Informar a natureza da análise realizada.</td>
+            </tr>
+            <tr>
+              <td>dc:description</td>
+              <td>Data Analysis</td>
+              <td>theoreticalFramework</td>
+              <td>Informar o referencial teórico utilizado na análise e interpretação dos resultados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

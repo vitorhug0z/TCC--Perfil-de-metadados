@@ -5,15 +5,76 @@
     font-family:Segoe UI, sans-serif;
 }
 
+/* ================================= */
+/* BODY */
+/* ================================= */
+
 body{
     background:#f1f5f9;
-    padding:40px 20px;
+    margin:0;
+    padding:0;
+}
+
+/* ================================= */
+/* MENU LATERAL */
+/* ================================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#1e293b;
+    box-shadow:2px 0 10px rgba(0,0,0,.1);
+    z-index:1000;
+}
+
+.sidebar h2{
+    color:white;
+    text-align:center;
+    padding:25px 15px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.sidebar a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    padding:16px 24px;
+
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:#334155;
+}
+
+.sidebar a.active{
+    background:#2563eb;
+}
+
+/* ================================= */
+/* CONTEÚDO PRINCIPAL */
+/* ================================= */
+
+.main-content{
+    margin-left:250px;
+    padding:40px 30px;
 }
 
 .container{
     max-width:1100px;
-    margin:auto;
+    margin:0 auto;
 }
+
+/* ================================= */
+/* CABEÇALHO */
+/* ================================= */
 
 header{
     text-align:center;
@@ -28,6 +89,10 @@ header h1{
 header p{
     color:#64748b;
 }
+
+/* ================================= */
+/* CARDS */
+/* ================================= */
 
 .card{
     background:white;
@@ -45,6 +110,16 @@ header p{
     border-bottom:1px solid #e2e8f0;
     padding-bottom:10px;
 }
+
+.card p{
+    color:#334155;
+    line-height:1.8;
+    text-align:justify;
+}
+
+/* ================================= */
+/* CAMPOS */
+/* ================================= */
 
 .field{
     margin-bottom:22px;
@@ -88,11 +163,10 @@ textarea:focus{
     border-color:#2563eb;
 
     box-shadow:0 0 0 3px rgba(37,99,235,.15);
-
 }
 
 /* ================================= */
-/* ÁREA DOS BOTÕES */
+/* BOTÕES */
 /* ================================= */
 
 .actions{
@@ -104,10 +178,6 @@ textarea:focus{
     margin-top:35px;
     margin-bottom:50px;
 }
-
-/* ================================= */
-/* ESTILO GERAL DOS BOTÕES */
-/* ================================= */
 
 .actions button{
 
@@ -129,50 +199,32 @@ textarea:focus{
     gap:10px;
 }
 
-/* ================================= */
-/* BOTÃO VER RESPOSTAS */
-/* ================================= */
-
 #verRespostas{
-
     background:#2563eb;
     color:white;
 }
 
 #verRespostas:hover{
-
     background:#1d4ed8;
     transform:translateY(-2px);
 }
 
-/* ================================= */
-/* BOTÃO GERAR XML */
-/* ================================= */
-
 #generateXML{
-
     background:#16a34a;
     color:white;
 }
 
 #generateXML:hover{
-
     background:#15803d;
     transform:translateY(-2px);
 }
 
-/* ================================= */
-/* BOTÃO VOLTAR */
-/* ================================= */
-
 #voltarFormulario{
-
     background:#2563eb;
     color:white;
 }
 
 #voltarFormulario:hover{
-
     background:#1d4ed8;
     transform:translateY(-2px);
 }
@@ -191,7 +243,6 @@ textarea:focus{
 }
 
 .tooltip i{
-
     font-size:14px;
 }
 
@@ -235,7 +286,7 @@ textarea:focus{
 }
 
 /* ================================= */
-/* TELA DE REVISÃO DAS RESPOSTAS */
+/* REVISÃO */
 /* ================================= */
 
 .review-container{
@@ -260,7 +311,6 @@ textarea:focus{
 }
 
 .review-field{
-
     margin-bottom:20px;
 }
 
@@ -276,8 +326,53 @@ textarea:focus{
 }
 
 .review-field textarea{
-
     min-height:80px;
+}
+
+/* ================================= */
+/* AJUDA */
+/* ================================= */
+
+.help-list{
+    margin-left:25px;
+    margin-top:15px;
+}
+
+.help-list li{
+    margin-bottom:12px;
+    line-height:1.8;
+}
+
+/* ================================= */
+/* TABELA */
+/* ================================= */
+
+.help-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:14px;
+}
+
+.help-table th{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+
+.help-table td{
+    border:1px solid #e2e8f0;
+    padding:10px;
+    vertical-align:top;
+}
+
+.help-table tr:nth-child(even){
+    background:#faf7f2;
+}
+
+.help-table tr:hover{
+    background:#fef3c7;
 }
 
 /* ================================= */
@@ -286,20 +381,33 @@ textarea:focus{
 
 @media(max-width:768px){
 
-    .actions{
+    .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+    }
 
+    .main-content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .actions{
         flex-direction:column;
     }
 
     .actions button{
-
         width:100%;
         justify-content:center;
     }
 
     .tooltip-text{
-
         width:220px;
     }
 
+    .help-table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
 }
