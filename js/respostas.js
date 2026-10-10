@@ -139,57 +139,46 @@ function gerarXML() {
 
 <dc:subject.caseStudyProfile>
 
-<dc:title>${title}</dc:title>
-<dc:creator>${creator}</dc:creator>
-<dc:date>${date}</dc:date>
-<dc:language>${language}</dc:language>
+    <dc:title>${title}</dc:title>
+    <dc:creator>${creator}</dc:creator>
+    <dc:date>${date}</dc:date>
+    <dc:language>${language}</dc:language> 
+    <dc:type>Estudo de Caso</dc:type>
 
-<dc:type>Estudo de Caso</dc:type>
+    <dc:subject.problemDefinition>
+        <dc:description.problem>${problem}</dc:description.problem>
+        <dc:description.Objective>${objective}</dc:description.Objective>
+        <dc:description.studyNature>${studyNature}</dc:description.studyNature>
+    </dc:subject.problemDefinition>
 
-<dc:subject.problemDefinition>
-<dc:description.problem>${problem}</dc:description.problem>
-<dc:description.Objective>${objective}</dc:description.Objective>
-<dc:description.studyNature>${studyNature}</dc:description.studyNature>
-</dc:subject.problemDefinition>
+    <dc:subject.unitCaseDefinition>
+        <dc:description.unitCase>
+            <dc:description.unitName>${unitName}</dc:description.unitName>
+            <dc:description.unitType>${unitType}</dc:description.unitType>
+        </dc:description.unitCase>
+        <dc:coverage>
+            <dc:description.spatial>${spatial}</dc:description.spatial>
+            <dc:description.temporal>${temporal}</dc:description.temporal>
+        </dc:coverage>
+    </dc:subject.unitCaseDefinition>
 
-<dc:subject.unitCaseDefinition>
+    <dc:subject.caseNumberDefinition>
+        <dc:description.caseDesign>${caseDesign}</dc:description.caseDesign>
+        <dc:description.caseCount>${caseCount}</dc:description.caseCount>
+    </dc:subject.caseNumberDefinition>
 
-<dc:description.unitCase>
-<dc:description.unitName>${unitName}</dc:description.unitName>
-<dc:description.unitType>${unitType}</dc:description.unitType>
-</dc:description.unitCase>
+    <dc:subject.dataCollection>
+        <dc:description.evidenceSources>${evidenceSources}</dc:description.evidenceSources>
+        <dc:description.dataCollectionTechniques>
+            <dc:description.technique>${techniques}</dc:description.technique>
+        </dc:description.dataCollectionTechniques>
+        <dc:description.validityStrategy>${validityStrategy}</dc:description.validityStrategy>
+    </dc:subject.dataCollection>
 
-<dc:coverage>
-<dc:description.spatial>${spatial}</dc:description.spatial>
-<dc:description.temporal>${temporal}</dc:description.temporal>
-</dc:coverage>
-
-</dc:subject.unitCaseDefinition>
-
-<dc:subject.caseNumberDefinition>
-<dc:description.caseDesign>${caseDesign}</dc:description.caseDesign>
-<dc:description.caseCount>${caseCount}</dc:description.caseCount>
-</dc:subject.caseNumberDefinition>
-
-<dc:subject.dataCollection>
-
-<dc:description.evidenceSources>${evidenceSources}</dc:description.evidenceSources>
-
-<dc:description.dataCollectionTechniques>
-<dc:description.technique>${techniques}</dc:description.technique>
-</dc:description.dataCollectionTechniques>
-
-<dc:description.validityStrategy>${validityStrategy}</dc:description.validityStrategy>
-
-</dc:subject.dataCollection>
-
-<dc:subject.dataAnalysis>
-
-<dc:description.analysisNature>${analysisNature}</dc:description.analysisNature>
-
-<dc:description.theoreticalFramework>${theoreticalFramework}</dc:description.theoreticalFramework>
-
-</dc:subject.dataAnalysis>
+    <dc:subject.dataAnalysis>
+        <dc:description.analysisNature>${analysisNature}</dc:description.analysisNature>
+        <dc:description.theoreticalFramework>${theoreticalFramework}</dc:description.theoreticalFramework>
+    </dc:subject.dataAnalysis>
 
 </dc:subject.caseStudyProfile>`;
 
