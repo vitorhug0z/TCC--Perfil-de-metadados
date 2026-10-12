@@ -1,203 +1,412 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const dados = JSON.parse(
+        localStorage.getItem("caseStudyData") || "{}"
+    );
 
-    const dados =
-        JSON.parse(
-            localStorage.getItem("caseStudyData")
-        );
+    const campos = document.getElementById("campos");
+    const botaoXML = document.getElementById("generateXML");
 
-    const campos =
-        document.getElementById("campos");
+    // Metadados do perfil CSPM.
+    const CAMPOS = [
+        { id: "title", label: "Título", path: ["dc:title"], tipo: "input" },
+        { id: "creator", label: "Autor(es)", path: ["dc:creator"], tipo: "input" },
+        { id: "date", label: "Data", path: ["dc:date"], tipo: "input" },
+        { id: "language", label: "Idioma", path: ["dc:language"], tipo: "select" },
 
-    campos.innerHTML = `
+        {
+            id: "problem",
+            label: "Problema de pesquisa",
+            path: ["dc:subject.problemDefinition", "dc:description.problem"],
+            tipo: "textarea"
+        },
+        {
+            id: "objective",
+            label: "Objetivo",
+            path: ["dc:subject.problemDefinition", "dc:description.Objective"],
+            tipo: "textarea"
+        },
+        {
+            id: "studyNature",
+            label: "Natureza do estudo",
+            path: ["dc:subject.problemDefinition", "dc:description.studyNature"],
+            tipo: "select"
+        },
 
-    <div class="field">
-        <label>Título</label>
-        <textarea id="title" disabled>${dados.title}</textarea>
-    </div>
+        {
+            id: "unitName",
+            label: "Nome da unidade-caso",
+            path: [
+                "dc:subject.unitCaseDefinition",
+                "dc:description.unitCase",
+                "dc:description.unitName"
+            ],
+            tipo: "input"
+        },
+        {
+            id: "unitType",
+            label: "Tipo da unidade-caso",
+            path: [
+                "dc:subject.unitCaseDefinition",
+                "dc:description.unitCase",
+                "dc:description.unitType"
+            ],
+            tipo: "input"
+        },
+        {
+            id: "spatial",
+            label: "Abrangência espacial",
+            path: [
+                "dc:subject.unitCaseDefinition",
+                "dc:coverage",
+                "dc:description.spatial"
+            ],
+            tipo: "input"
+        },
+        {
+            id: "temporal",
+            label: "Abrangência temporal",
+            path: [
+                "dc:subject.unitCaseDefinition",
+                "dc:coverage",
+                "dc:description.temporal"
+            ],
+            tipo: "input"
+        },
+    
+        {
+            id: "caseDesign",
+            label: "Delineamento do estudo de caso",
+            path: [
+                "dc:subject.caseNumberDefinition",
+                "dc:description.caseDesign"
+            ],
+            tipo: "select"
+        },
+        {
+            id: "caseCount",
+            label: "Quantidade de casos",
+            path: [
+                "dc:subject.caseNumberDefinition",
+                "dc:description.caseCount"
+            ],
+            tipo: "input"
+        },
 
-<div class="field">
-    <label>Autor(es)</label>
-    <textarea id="creator" disabled>${dados.creator}</textarea>
-</div>
+        {
+            id: "evidenceSources",
+            label: "Fontes de evidência",
+            path: ["dc:subject.dataCollection", "dc:description.evidenceSources"],
+            tipo: "textarea"
+        },
+        {
+            id: "techniques",
+            label: "Técnicas de coleta de dados",
+            path: [
+                "dc:subject.dataCollection",
+                "dc:description.dataCollectionTechniques",
+                "dc:description.technique"
+            ],
+            tipo: "textarea"
+        },
+        {
+            id: "validityStrategy",
+            label: "Estratégia de validade",
+            path: ["dc:subject.dataCollection", "dc:description.validityStrategy"],
+            tipo: "textarea"
+        },
 
-<div class="field">
-    <label>Data</label>
-    <textarea id="date" disabled>${dados.date}</textarea>
-</div>
+        {
+            id: "analysisNature",
+            label: "Natureza da análise",
+            path: ["dc:subject.dataAnalysis", "dc:description.analysisNature"],
+            tipo: "select"
+        },
+        {
+            id: "theoreticalFramework",
+            label: "Referencial teórico",
+            path: [
+                "dc:subject.dataAnalysis",
+                "dc:description.theoreticalFramework"
+            ],
+            tipo: "textarea"
+        }
+    ];
 
-<div class="field">
-    <label>Idioma</label>
-    <textarea id="language" disabled>${dados.language}</textarea>
-</div>
+    // Organização dos campos nas mesmas seções do formulário.
+    const SECOES = [
+        {
+            titulo: "Informações Gerais",
+            campos: ["title", "creator", "date", "language"]
+        },
+        {
+            titulo: "Formulação do Problema",
+            campos: ["problem", "objective", "studyNature"]
+        },
+        {
+            titulo: "Definição da Unidade-Caso",
+            campos: [
+                "unitName",
+                "unitType",
+                "spatial",
+                "temporal"
+            ]
+        },
+        {
+            titulo: "Definição do Número de Casos",
+            campos: ["caseDesign", "caseCount"]
+        },
+        {
+            titulo: "Coleta de Dados",
+            campos: [
+                "evidenceSources",
+                "techniques",
+                "validityStrategy"
+            ]
+        },
+        {
+            titulo: "Análise e Interpretação dos Dados",
+            campos: ["analysisNature", "theoreticalFramework"]
+        }
+    ];
 
-<div class="field">
-    <label>Problema</label>
-    <textarea id="problem" disabled>${dados.problem}</textarea>
-</div>
+    // Exibe os campos desabilitados e as opções de inclusão no XML.
+    SECOES.forEach(secao => {
+        const card = document.createElement("section");
+        card.className = "card";
 
-<div class="field">
-    <label>Objetivo</label>
-    <textarea id="objective" disabled>${dados.objective}</textarea>
-</div>
+        const titulo = document.createElement("h2");
+        titulo.textContent = secao.titulo;
+        card.appendChild(titulo);
 
-<div class="field">
-    <label>Natureza do Estudo</label>
-    <textarea id="studyNature" disabled>${dados.studyNature}</textarea>
-</div>
+        secao.campos.forEach(id => {
+            const campo = CAMPOS.find(item => item.id === id);
 
-<div class="field">
-    <label>Nome da Unidade</label>
-    <textarea id="unitName" disabled>${dados.unitName}</textarea>
-</div>
+            if (!campo) return;
 
-<div class="field">
-    <label>Tipo da Unidade</label>
-    <textarea id="unitType" disabled>${dados.unitType}</textarea>
-</div>
+            const field = document.createElement("div");
+            field.className = "field";
 
-<div class="field">
-    <label>Cobertura Espacial</label>
-    <textarea id="spatial" disabled>${dados.spatial}</textarea>
-</div>
+            const rotulo = document.createElement("label");
+            rotulo.htmlFor = `revisao-${id}`;
+            rotulo.textContent = campo.label;
 
-<div class="field">
-    <label>Cobertura Temporal</label>
-    <textarea id="temporal" disabled>${dados.temporal}</textarea>
-</div>
+            let input;
 
-<div class="field">
-    <label>Desenho do Caso</label>
-    <textarea id="caseDesign" disabled>${dados.caseDesign}</textarea>
-</div>
+            if (campo.tipo === "textarea") {
+                input = document.createElement("textarea");
+                input.rows = 3;
+                input.value = dados[id] ?? "";
+            } else if (campo.tipo === "select") {
+                input = document.createElement("select");
 
-<div class="field">
-    <label>Quantidade de Casos</label>
-    <textarea id="caseCount" disabled>${dados.caseCount}</textarea>
-</div>
+                const opcao = document.createElement("option");
+                opcao.value = dados[id] ?? "";
+                opcao.textContent = dados[id] || "Não informado";
 
-<div class="field">
-    <label>Fontes de Evidência</label>
-    <textarea id="evidenceSources" disabled>${dados.evidenceSources}</textarea>
-</div>
+                input.appendChild(opcao);
+            } else {
+                input = document.createElement("input");
+                input.type = id === "caseCount" ? "number" : "text";
+                input.value = dados[id] ?? "";
+            }
 
-<div class="field">
-    <label>Técnicas de Coleta</label>
-    <textarea id="techniques" disabled>${dados.techniques}</textarea>
-</div>
+            input.id = `revisao-${id}`;
+            input.disabled = true;
 
-<div class="field">
-    <label>Estratégia de Validação</label>
-    <textarea id="validityStrategy" disabled>${dados.validityStrategy}</textarea>
-</div>
+            const labelInclusao = document.createElement("label");
+            labelInclusao.className = "selecao-xml";
+            labelInclusao.htmlFor = `campo-${id}`;
 
-<div class="field">
-    <label>Natureza da Análise</label>
-    <textarea id="analysisNature" disabled>${dados.analysisNature}</textarea>
-</div>
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `campo-${id}`;
+            checkbox.checked = true;
 
-<div class="field">
-    <label>Quadro Teórico</label>
-    <textarea id="theoreticalFramework" disabled>${dados.theoreticalFramework}</textarea>
-</div>
+            labelInclusao.appendChild(checkbox);
+            labelInclusao.appendChild(
+                document.createTextNode(" Incluir este campo no XML")
+            );
 
-`;
+            field.appendChild(rotulo);
+            field.appendChild(input);
+            field.appendChild(labelInclusao);
 
-    document
-        .getElementById("generateXML")
-        .addEventListener("click", gerarXML);
+            card.appendChild(field);
+        });
 
-});
-
-function gerarXML() {
-
-    const title = document.getElementById("title").value;
-    const creator = document.getElementById("creator").value;
-    const date = document.getElementById("date").value;
-    const language = document.getElementById("language").value;
-
-    const problem = document.getElementById("problem").value;
-    const objective = document.getElementById("objective").value;
-    const studyNature = document.getElementById("studyNature").value;
-
-    const unitName = document.getElementById("unitName").value;
-    const unitType = document.getElementById("unitType").value;
-
-    const spatial = document.getElementById("spatial").value;
-    const temporal = document.getElementById("temporal").value;
-
-    const caseDesign = document.getElementById("caseDesign").value;
-    const caseCount = document.getElementById("caseCount").value;
-
-    const evidenceSources = document.getElementById("evidenceSources").value;
-    const techniques = document.getElementById("techniques").value;
-    const validityStrategy = document.getElementById("validityStrategy").value;
-
-    const analysisNature = document.getElementById("analysisNature").value;
-    const theoreticalFramework = document.getElementById("theoreticalFramework").value;
-
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>
-
-<dc:subject.caseStudyProfile>
-
-    <dc:title>${title}</dc:title>
-    <dc:creator>${creator}</dc:creator>
-    <dc:date>${date}</dc:date>
-    <dc:language>${language}</dc:language> 
-    <dc:type>Estudo de Caso</dc:type>
-
-    <dc:subject.problemDefinition>
-        <dc:description.problem>${problem}</dc:description.problem>
-        <dc:description.Objective>${objective}</dc:description.Objective>
-        <dc:description.studyNature>${studyNature}</dc:description.studyNature>
-    </dc:subject.problemDefinition>
-
-    <dc:subject.unitCaseDefinition>
-        <dc:description.unitCase>
-            <dc:description.unitName>${unitName}</dc:description.unitName>
-            <dc:description.unitType>${unitType}</dc:description.unitType>
-        </dc:description.unitCase>
-        <dc:coverage>
-            <dc:description.spatial>${spatial}</dc:description.spatial>
-            <dc:description.temporal>${temporal}</dc:description.temporal>
-        </dc:coverage>
-    </dc:subject.unitCaseDefinition>
-
-    <dc:subject.caseNumberDefinition>
-        <dc:description.caseDesign>${caseDesign}</dc:description.caseDesign>
-        <dc:description.caseCount>${caseCount}</dc:description.caseCount>
-    </dc:subject.caseNumberDefinition>
-
-    <dc:subject.dataCollection>
-        <dc:description.evidenceSources>${evidenceSources}</dc:description.evidenceSources>
-        <dc:description.dataCollectionTechniques>
-            <dc:description.technique>${techniques}</dc:description.technique>
-        </dc:description.dataCollectionTechniques>
-        <dc:description.validityStrategy>${validityStrategy}</dc:description.validityStrategy>
-    </dc:subject.dataCollection>
-
-    <dc:subject.dataAnalysis>
-        <dc:description.analysisNature>${analysisNature}</dc:description.analysisNature>
-        <dc:description.theoreticalFramework>${theoreticalFramework}</dc:description.theoreticalFramework>
-    </dc:subject.dataAnalysis>
-
-</dc:subject.caseStudyProfile>`;
-
-    const blob = new Blob([xml], {
-        type: "application/xml"
+        campos.appendChild(card);
     });
 
-    const url = URL.createObjectURL(blob);
+    botaoXML.addEventListener("click", gerarXML);
 
-    const link = document.createElement("a");
+    // Gera o XML de acordo com os campos selecionados.
+    function gerarXML() {
+        const selecionados = new Set(
+            CAMPOS
+                .filter(campo => {
+                    const checkbox = document.getElementById(
+                        `campo-${campo.id}`
+                    );
 
-    link.href = url;
-    link.download = "CaseStudyProfile.xml";
+                    return checkbox && checkbox.checked;
+                })
+                .map(campo => campo.id)
+        );
 
-    document.body.appendChild(link);
+        function escaparXML(valor) {
+            return String(valor ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&apos;");
+        }
 
-    link.click();
+        function incluido(id) {
+            return selecionados.has(id);
+        }
 
-    document.body.removeChild(link);
+        function tag(nome, id, nivel) {
+            if (!incluido(id)) return "";
 
-    URL.revokeObjectURL(url);
-}
+            const espacos = "    ".repeat(nivel);
+            const valor = escaparXML(dados[id]);
+
+            return `${espacos}<${nome}>${valor}</${nome}>\n`;
+        }
+
+        // Mantém as tags consecutivas dentro de cada seção.
+        function secao(nome, conteudo, nivel) {
+            if (!conteudo.trim()) return "";
+
+            const espacos = "    ".repeat(nivel);
+
+            return (
+                `${espacos}<${nome}>\n` +
+                conteudo +
+                `${espacos}</${nome}>\n`
+            );
+        }
+
+        let xml =
+            '<?xml version="1.0" encoding="UTF-8"?>\n' +
+            '<dc:subject.caseStudyProfile xmlns:dc="http://purl.org/dc/elements/1.1/">\n';
+
+        // 1. Informações gerais.
+        xml += tag("dc:title", "title", 1);
+        xml += tag("dc:creator", "creator", 1);
+        xml += tag("dc:date", "date", 1);
+        xml += tag("dc:language", "language", 1);
+        xml += '    <dc:type>Estudo de Caso</dc:type>\n';
+
+        // 2. Formulação do problema.
+        let problema = "";
+        problema += tag("dc:description.problem", "problem", 2);
+        problema += tag("dc:description.Objective", "objective", 2);
+        problema += tag("dc:description.studyNature", "studyNature", 2);
+
+        xml += "\n";
+        xml += secao("dc:subject.problemDefinition", problema, 1);
+
+        // 3. Definição da unidade-caso.
+        let unidade = "";
+
+        let dadosUnidade = "";
+        dadosUnidade += tag("dc:description.unitName", "unitName", 3);
+        dadosUnidade += tag("dc:description.unitType", "unitType", 3);
+
+        unidade += secao(
+            "dc:description.unitCase",
+            dadosUnidade,
+            2
+        );
+
+        let cobertura = "";
+        cobertura += tag("dc:description.spatial", "spatial", 3);
+        cobertura += tag("dc:description.temporal", "temporal", 3);
+
+        unidade += secao("dc:coverage", cobertura, 2);
+
+        xml += "\n";
+        xml += secao("dc:subject.unitCaseDefinition", unidade, 1);
+
+        // 4. Definição do número de casos.
+        let casos = "";
+        casos += tag("dc:description.caseDesign", "caseDesign", 2);
+        casos += tag("dc:description.caseCount", "caseCount", 2);
+
+        xml += "\n";
+        xml += secao("dc:subject.caseNumberDefinition", casos, 1);
+
+        // 5. Coleta de dados.
+        let coleta = "";
+
+        coleta += tag(
+            "dc:description.evidenceSources",
+            "evidenceSources",
+            2
+        );
+
+        let tecnicas = "";
+        tecnicas += tag("dc:description.technique", "techniques", 3);
+
+        coleta += secao(
+            "dc:description.dataCollectionTechniques",
+            tecnicas,
+            2
+        );
+
+        coleta += tag(
+            "dc:description.validityStrategy",
+            "validityStrategy",
+            2
+        );
+
+        xml += "\n";
+        xml += secao("dc:subject.dataCollection", coleta, 1);
+
+        // 6. Análise de dados.
+        let analise = "";
+
+        analise += tag(
+            "dc:description.analysisNature",
+            "analysisNature",
+            2
+        );
+
+        analise += tag(
+            "dc:description.theoreticalFramework",
+            "theoreticalFramework",
+            2
+        );
+
+        xml += "\n";
+        xml += secao("dc:subject.dataAnalysis", analise, 1);
+
+        xml += "\n</dc:subject.caseStudyProfile>\n";
+
+        // Cria o arquivo para download.
+        const blob = new Blob([xml], {
+            type: "application/xml;charset=utf-8"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "CaseStudyProfile.xml";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        // Limpa os dados para o próximo preenchimento.
+        localStorage.removeItem("caseStudyData");
+
+        // Libera a URL e retorna ao formulário inicial.
+        setTimeout(() => {
+            URL.revokeObjectURL(url);
+            window.location.href = "index.html";
+        }, 1000);
+    }
+});

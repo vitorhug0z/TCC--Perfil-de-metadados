@@ -112,8 +112,8 @@
                 
                 </label>
 
-                <select id="idioma" required>
-                    <option>Selecione um idioma</option>
+                <select id="language" required>
+                    <option value="">Selecione um idioma</option>
                     <option>Português</option>
                     <option>Inglês</option>
                     <option>Espanhol</option>
@@ -185,7 +185,7 @@
                         <i class="fa-solid fa-circle-info"></i>
 
                         <span class="tooltip-text">
-                            Classifique como exploratório, descritivo ou explicativo.
+                            Classifique a natureza do estudo de acordo com sua finalidade: **exploratório**, quando busca obter maior compreensão sobre um tema ou fenômeno ainda pouco conhecido; **descritivo**, quando pretende caracterizar um fenômeno, situação, população ou processo; ou **explicativo**, quando busca identificar fatores, relações ou possíveis causas que ajudam a explicar o fenômeno investigado.
                         </span>
                     </span>
 
@@ -429,8 +429,13 @@
 
         </label>
 
-        <textarea id="analysisNature"></textarea>
-
+        <select id="analysisNature">
+            <option value="">Selecione</option>
+            <option>Quantitativa</option>
+            <option>Qualitativa</option>
+            <option>Predominantemente Qualitativa</option>
+            <option>Predominantemente Quantitativa</option>
+        </select>
     </div>
 
     <div class="field">
